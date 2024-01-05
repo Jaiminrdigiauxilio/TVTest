@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "188732581552",
+    "project_id": "syncscreen-d1833",
+    "storage_bucket": "syncscreen-d1833.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:188732581552:android:b4c105daa31e6efbc3bd75",
+        "android_client_info": {
+          "package_name": "com.example.tvtest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5Wm9TqvwQ7eiXL55TXKuei0YlGsLIMfU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
