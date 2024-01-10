@@ -2,8 +2,11 @@ package com.example.tvtest
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.widget.ViewPager2
+import com.google.firebase.Firebase
+import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -42,6 +45,26 @@ class ImagePreviewActivity : FragmentActivity() {
                 }
             }
         }
+
+        firebaseReadData()
+    }
+
+    private fun firebaseReadData() {
+
+        val db = Firebase.firestore
+        val TAG = "ImageFetch"
+        db.collection("templates")
+            .get()
+            .addOnSuccessListener { result ->
+                for(doc in result) {
+                    Log.d(TAG, "${doc.id} => ${doc.data}")
+                    println("-/-/-/-/-/-/-/-/-/-/-/-/-/Data Fetched")
+                }
+            }
+            .addOnFailureListener() {exception ->
+                Log.w(TAG, "/-/-/-/-/-/ Error in fetching images", exception)
+
+            }
     }
 
     override fun onDestroy() {
