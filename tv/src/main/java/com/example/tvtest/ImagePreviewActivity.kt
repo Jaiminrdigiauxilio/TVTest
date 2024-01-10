@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.firebase.Firebase
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -14,11 +15,13 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.math.log
 
 class ImagePreviewActivity : FragmentActivity() {
 
     private  lateinit var viewPager: ViewPager2
     private  lateinit var imgAdapter: ImageAdapter
+    private val fetchedImgList = mutableListOf<Map<String, Any>>()
     private  val imgList = listOf(
         ImageModel("https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D"),
         ImageModel("https://1.bp.blogspot.com/-BknVauztAWE/Uv4XuRHItGI/AAAAAAAAChk/0CZgIDXIDzE/s1600/Rocks+Water+wallpaper.jpg"),
@@ -46,9 +49,46 @@ class ImagePreviewActivity : FragmentActivity() {
             }
         }
 
-        firebaseReadData()
+//        firebaseReadData()
+        listenFirebaseDb()
     }
 
+    //      listening code for firebase
+    private fun listenFirebaseDb() {
+        val db = FirebaseFirestore.getInstance()
+        val docRef = db.collection("templates")
+        val TAG = "ImageFetch"
+
+        val registration = docRef.addSnapshotListener { snapshot, err ->
+            if (err != null) {
+                Log.w(TAG, "Listen Failed",err)
+                println("-/-/-/-/-/Listen Failed $err")
+                return@addSnapshotListener
+            }
+
+            if(snapshot != null) {
+                // emptying list in order to have no duplicates
+                fetchedImgList.clear()
+
+                for(docs in snapshot) {
+                    // Adding data to local List
+                    fetchedImgList.add(docs.data)
+                    Log.d(TAG, "-/-/-/-/-/-/-/-/-/- document Data: ${docs.data}")
+                }
+
+            } else {
+                Log.d(TAG,"Snapshot data: null")
+            }
+            Log.d(TAG, "List data: ${fetchedImgList}")
+        }
+    }
+
+
+    //      setting all img URLs from db to local list
+    fun setAllImgs() {
+
+    }
+    //      Fetching data from firebase
     private fun firebaseReadData() {
 
         val db = Firebase.firestore
