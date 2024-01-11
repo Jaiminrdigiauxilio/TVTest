@@ -29,7 +29,11 @@ class ImagePreviewActivity : FragmentActivity() {
     private val fetchedImgList = mutableListOf<Map<String, Any>>()
 
     private val imgList = mutableListOf<ImageModel>()
-    private val durationList = mutableListOf<Long>()
+//    private val durationList = mutableListOf<Long>()
+    private val durationList = mutableListOf<Long>(
+        2500, 3500, 4500, 5500, 2500, 1500
+    )
+
     private val handler = Handler(Looper.getMainLooper())
 
 //    private val imgList = listOf(
@@ -65,6 +69,8 @@ class ImagePreviewActivity : FragmentActivity() {
 //                    Log.d(TAG, "Printing currentItem ${durationList.size}")
                     viewPager.setCurrentItem((currentItem + 1) % imgList.size, true)
                 }
+//                handler.postDelayed(this, 200)
+//                delay(durationList[viewPager.currentItem])
             }
         }
     }
@@ -147,16 +153,16 @@ class ImagePreviewActivity : FragmentActivity() {
 //    }
 
 
-    fun scheduleNextTimer(timer: Timer, index: Int, delay: Long = 2500) {
-        timer.schedule(object : TimerTask() {
-            override fun run() {
-//                handler.post(
-//                    viewPager.setCurrentItem(index,true)
-//                )
-            }
-
-        }, delay)
-    }
+//    fun scheduleNextTimer(timer: Timer, index: Int, delay: Long = 2500) {
+//        timer.schedule(object : TimerTask() {
+//            override fun run() {
+////                handler.post(
+////                    viewPager.setCurrentItem(index,true)
+////                )
+//            }
+//
+//        }, delay)
+//    }
 
 
     override fun onDestroy() {
