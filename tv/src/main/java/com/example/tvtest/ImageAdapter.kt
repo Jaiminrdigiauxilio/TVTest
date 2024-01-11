@@ -11,6 +11,8 @@ import com.squareup.picasso.Picasso
 class ImageAdapter(private  val images: List<ImageModel>):
     RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
 
+        private var imgData:List<ImageModel> = images
+
         inner class ImageViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
             val imageView: ImageView = itemView.findViewById(R.id.displayImg)
         }
@@ -22,15 +24,20 @@ class ImageAdapter(private  val images: List<ImageModel>):
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        val imgUrl = images[position].imgUrl
+        val imgUrl = imgData[position].imgUrl
         Picasso
             .get()
             .load(imgUrl)
             .into(holder.imageView)
     }
 
+    fun updateData(newData: List<ImageModel>) {
+        imgData = newData
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int {
-        return images.size
+        return imgData.size
     }
 
 }
