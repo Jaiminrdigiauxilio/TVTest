@@ -12,6 +12,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -46,7 +47,8 @@ class ImagePreviewActivity : FragmentActivity() {
 
         viewPager = findViewById(R.id.viewPager)
 
-        listenFirebaseDb()
+        val dataReady = CompletableDeferred<Unit>()
+        listenFirebaseDb(dataReady)
 
         GlobalScope.launch {
 
@@ -78,7 +80,7 @@ class ImagePreviewActivity : FragmentActivity() {
 
 
     //      listening code for firebase
-    private fun listenFirebaseDb() {
+    private fun listenFirebaseDb(dataReady: CompletableDeferred<Unit>) {
         val db = FirebaseFirestore.getInstance()
         val docRef = db.collection("templates")
 
@@ -108,6 +110,7 @@ class ImagePreviewActivity : FragmentActivity() {
 //            Log.d(TAG, "List data: ${fetchedImgList}")
 //            Log.d(TAG, "List Duration: ${durationList}")
             setAllImgs()
+            dataReady.complete(Unit)
         }
     }
 
