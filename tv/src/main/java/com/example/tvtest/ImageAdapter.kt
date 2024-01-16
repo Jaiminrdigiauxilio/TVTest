@@ -12,7 +12,6 @@ class ImageAdapter(private  val images: List<ImageModel>):
     RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
 
         private var imgData:List<ImageModel> = images
-
         inner class ImageViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
             val imageView: ImageView = itemView.findViewById(R.id.displayImg)
         }
@@ -42,4 +41,4 @@ class ImageAdapter(private  val images: List<ImageModel>):
 
 }
 
-data class ImageModel(val imgUrl: String)
+data class ImageModel(val imgUrl: String, val duration: Long)
