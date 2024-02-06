@@ -87,7 +87,7 @@ class ImagePreviewActivity : FragmentActivity() {
 
         val registration = docRef.addSnapshotListener { snapshot, err ->
             if (err != null) {
-                Log.w(TAG, "Listen Failed",err)
+//                Log.w(TAG, "Listen Failed",err)
 //                println("-/-/-/-/-/Listen Failed $err")
                 return@addSnapshotListener
             }
@@ -100,7 +100,7 @@ class ImagePreviewActivity : FragmentActivity() {
                 for(docs in snapshot) {
                     // Adding data to local List
                     fetchedImgList.add(docs.data)
-                    Log.d(TAG, "-/-/-/-/-/-/-/-/-/- document Data: ${docs.data}")
+//                    Log.d(TAG, "-/-/-/-/-/-/-/-/-/- document Data: ${docs.data}")
                     val duration = docs.data["duration"].toString()
                     durationList.add((duration.toLong()))
                 }
@@ -126,14 +126,14 @@ class ImagePreviewActivity : FragmentActivity() {
                 val urlStr = docs["url"].toString()
                 val urlDuration = docs["duration"].toString()
 
-                Log.d(TAG, "-/-/ LOCAL URLS ${urlStr}")
-                Log.d(TAG, "-/-/ LOCAL durations ${urlDuration.toLong()}")
+//                Log.d(TAG, "-/-/ LOCAL URLS ${urlStr}")
+//                Log.d(TAG, "-/-/ LOCAL durations ${urlDuration.toLong()}")
                 imgList.add(ImageModel(urlStr, urlDuration.toLong()))
 
             }
         }
         imgAdapter.updateData(imgList)
-        Log.d(TAG,"-/-/ LOCAL URLS LIST ${imgList}")
+//        Log.d(TAG,"-/-/ LOCAL URLS LIST ${imgList}")
     }
 
 
