@@ -28,20 +28,12 @@ class MainActivity : FragmentActivity() {
             val nextScreen = Intent(this@MainActivity, ImagePreviewActivity::class.java)
             startActivity(nextScreen)
         }
-
     }
 
     fun loadImg() {
 //        val urlStr = "https://images.pexels.com/photos/346529/pexels-photo-346529.jpeg"
         val urlStr = "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         Picasso.get().load(urlStr).into(welcomeImg)
-        //Debugging code
-//        val builder = Picasso.Builder(this)
-//        builder.listener(fun(picasso: Picasso, uri: Uri, exception: Exception) {
-//            exception.printStackTrace()
-//        })
-//        builder.build().load("https://www.simplifiedcoding.net/wp-content/uploads/2015/10/advertise.png").into(welcomeImg)
-
     }
 
 

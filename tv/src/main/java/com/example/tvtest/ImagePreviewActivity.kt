@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.lifecycleScope
+import androidx.media3.exoplayer.ExoPlayer
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.firebase.Firebase
@@ -30,6 +31,7 @@ class ImagePreviewActivity : FragmentActivity() {
     private  lateinit var imgAdapter: ImageAdapter
     private val fetchedImgList = mutableListOf<Map<String, Any>>()
 
+//    private val player = ExoPlayer.Builder(context).build()
     private val imgList = mutableListOf<ImageModel>()
 //    private val durationList = mutableListOf<Long>()
     private val durationList = mutableListOf<Long>(
@@ -151,34 +153,3 @@ class ImagePreviewActivity : FragmentActivity() {
 //        ImageModel("https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8NHx8fGVufDB8fHx8fA%3D%3D"),
 //        ImageModel("https://images.unsplash.com/photo-1674407729043-c21b71fded37?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTh8MTMxOTA0MHx8ZW58MHx8fHx8"),
 //    )
-
-
-//      Fetching data from firebase
-//    private fun firebaseReadData() {
-//
-//        val db = Firebase.firestore
-//        db.collection("templates")
-//            .get()
-//            .addOnSuccessListener { result ->
-//                for(doc in result) {
-//                    Log.d(TAG, "${doc.id} => ${doc.data}")
-////                    println("-/-/-/-/-/-/-/-/-/-/-/-/-/Data Fetched")
-//                }
-//            }
-//            .addOnFailureListener() {exception ->
-//                Log.w(TAG, "/-/-/-/-/-/ Error in fetching images", exception)
-//
-//            }
-//    }
-
-
-//    fun scheduleNextTimer(timer: Timer, index: Int, delay: Long = 2500) {
-//        timer.schedule(object : TimerTask() {
-//            override fun run() {
-////                handler.post(
-////                    viewPager.setCurrentItem(index,true)
-////                )
-//            }
-//
-//        }, delay)
-//    }
