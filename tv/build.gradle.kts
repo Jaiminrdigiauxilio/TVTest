@@ -17,6 +17,7 @@ android {
 
     }
 
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -50,6 +51,10 @@ dependencies {
 
     implementation("androidx.media3:media3-exoplayer:$media3_version")
     implementation("androidx.media3:media3-exoplayer-dash:$media3_version")
+//    implementation ("androidx.media3:media3-common:$media3_version")
     implementation("androidx.media3:media3-ui:$media3_version")
+//          Deprecated exoplayer dependencies
+//    implementation("com.google.android.exoplayer:exoplayer-common:2.19.1")
+//    implementation("com.google.android.exoplayer:exoplayer:2.19.1")
 
 }
