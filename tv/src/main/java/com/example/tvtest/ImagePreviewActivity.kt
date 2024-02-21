@@ -1,5 +1,4 @@
 package com.example.tvtest
-
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -13,6 +12,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -144,6 +144,8 @@ class ImagePreviewActivity : FragmentActivity() {
         coroutineScope.cancel()
     }
 }
+
+
 
 
 //    private val imgList = listOf(
