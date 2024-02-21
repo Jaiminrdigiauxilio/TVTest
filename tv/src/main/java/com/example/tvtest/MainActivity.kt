@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentActivity
 import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
+import com.squareup.picasso.PicassoTools
 
 class MainActivity : FragmentActivity() {
 
@@ -21,11 +22,13 @@ class MainActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        PicassoTools.clearCache(Picasso.get())
         welcomeImg = findViewById(R.id.welcomeImg)
         title = findViewById(R.id.title)
         getStartedBtn = findViewById(R.id.getStartedBtn)
 
         loadImg()
+
         getStartedBtn.setOnClickListener {
             val nextScreen = Intent(this@MainActivity, ImagePreviewActivity::class.java)
             startActivity(nextScreen)
