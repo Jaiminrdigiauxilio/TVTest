@@ -1,13 +1,22 @@
 package com.example.tvtest
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.FragmentActivity
 import androidx.media3.exoplayer.ExoPlayer
 import com.squareup.picasso.Picasso
+import com.squareup.picasso.PicassoTools
+import java.lang.Exception
+import kotlin.reflect.typeOf
 
 class MainActivity : FragmentActivity() {
 
@@ -23,14 +32,38 @@ class MainActivity : FragmentActivity() {
         title = findViewById(R.id.title)
         getStartedBtn = findViewById(R.id.getStartedBtn)
 
-        loadImg()
-        getStartedBtn.setOnClickListener {
-            val nextScreen = Intent(this@MainActivity, ImagePreviewActivity::class.java)
-            startActivity(nextScreen)
+        val p = Picasso.get()
+        PicassoTools.clearCache(p)
+        clearCacheDir(this)
+
+        if (isDeviceConnectedToNetwork()) {
+            loadImg()
+            getStartedBtn.setOnClickListener {
+                val nextScreen = Intent(this@MainActivity, ImagePreviewActivity::class.java)
+                startActivity(nextScreen)
+            }
+
+        } else {
+            val errSrc = Intent(this@MainActivity, ErrorScreen::class.java)
+            startActivity(errSrc)
+
         }
+
+
 
     }
 
+//    clears all the cache of in the android memory allocation for this app
+    private fun clearCacheDir(context: Context) {
+        try {
+            val cacheDir = context.cacheDir
+            cacheDir.deleteRecursively()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+//    loads image on main home screen
     private fun loadImg() {
 //        val urlStr = "https://images.pexels.com/photos/346529/pexels-photo-346529.jpeg"
         val urlStr = "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -38,6 +71,23 @@ class MainActivity : FragmentActivity() {
         //Debugging code
     }
 
+
+//    checks internet connectivity is there or not
+    private fun isDeviceConnectedToNetwork(): Boolean {
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            Log.d("Internet","-/-/ connectivity estd")
+            val network = connectivityManager.activeNetwork ?: return false
+            val networkCapabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+            return networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
+                    networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)
+        } else {
+            val networkInfo = connectivityManager.activeNetworkInfo
+            return networkInfo?.isConnected ?: false
+        }
+
+    }
 }
 
 

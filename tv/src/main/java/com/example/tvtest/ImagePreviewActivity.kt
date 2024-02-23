@@ -32,7 +32,7 @@ class ImagePreviewActivity : FragmentActivity() {
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
     private val TAG = "ImageFetch"
     private val TAGI = "VideoFetch"
-    private var type: MediaType = MediaType.VIDEO
+    private var type: MediaType = MediaType.IMAGE
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,8 +79,8 @@ class ImagePreviewActivity : FragmentActivity() {
 
         val registration = docRef.addSnapshotListener { snapshot, err ->
             if (err != null) {
-//                Log.w(TAG, "Listen Failed",err)
-//                println("-/-/-/-/-/Listen Failed $err")
+                Log.w("fire", "Listen Failed",err)
+                println("-/-/-/-/-/Listen Failed $err")
                 return@addSnapshotListener
             }
 
@@ -92,15 +92,15 @@ class ImagePreviewActivity : FragmentActivity() {
                 for(docs in snapshot) {
                     // Adding data to local List
                     fetchedImgList.add(docs.data)
-//                    Log.d(TAG, "-/-/-/-/-/-/-/-/-/- document Data: ${docs.data}")
+                    Log.d(TAG, "-/-/-/-/-/-/-/-/-/- document Data: ${docs.data}")
                     val duration = docs.data["duration"].toString()
                     durationList.add((duration.toLong()))
                 }
             } else {
                 Log.d(TAG,"Snapshot data: null")
             }
-//            Log.d(TAG, "List data: ${fetchedImgList}")
-//            Log.d(TAG, "List Duration: ${durationList}")
+            Log.d(TAG, "List data: ${fetchedImgList}")
+            Log.d(TAG, "List Duration: ${durationList}")
             setAllImgs()
             dataReady.complete(Unit)
         }
@@ -119,17 +119,17 @@ class ImagePreviewActivity : FragmentActivity() {
                 val urlDuration = docs["duration"].toString()
                 val urlType = docs["type"].toString()
 
-//                if (urlType.equals("image", true)) {
-//                    type = MediaType.IMAGE
-//                    Log.d(TAGI, "-/-/ LOCAL in photo ${type.name}")
-//                } else if(urlType.equals("video", true)) {
-//                    type = MediaType.VIDEO
-//                    Log.d(TAGI, "-/-/ LOCAL in vid ${type.name}")
-//                }
+                if (urlType.equals("image", true)) {
+                    type = MediaType.IMAGE
+                    Log.d(TAGI, "-/-/ LOCAL in photo ${type.name}")
+                } else if(urlType.equals("video", true)) {
+                    type = MediaType.VIDEO
+                    Log.d(TAGI, "-/-/ LOCAL in vid ${type.name}")
+                }
 
-//                Log.d(TAG, "-/-/ LOCAL URLS ${urlStr}")
-//                Log.d(TAG, "-/-/ LOCAL durations ${urlDuration.toLong()}")
-//                Log.d(TAGI, "-/-/ LOCAL types of media $type")
+                Log.d(TAG, "-/-/ LOCAL URLS ${urlStr}")
+                Log.d(TAG, "-/-/ LOCAL durations ${urlDuration.toLong()}")
+                Log.d(TAGI, "-/-/ LOCAL types of media $type")
                 Log.d(TAGI, "-/-/ LOCAL types of media $urlType")
 //                Log.d(TAGI, "-/-/ LOCAL types of media $urlType")
                 imgList.add(MediaItem(urlStr, urlDuration.toLong(), type))
@@ -139,6 +139,37 @@ class ImagePreviewActivity : FragmentActivity() {
         imgAdapter.updateData(imgList)
         Log.d(TAG,"-/-/ LOCAL URLS LIST ${imgList}")
     }
+
+
+    //    private val imgList = listOf(
+//        ImageModel("https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D"),
+//        ImageModel("https://1.bp.blogspot.com/-BknVauztAWE/Uv4XuRHItGI/AAAAAAAAChk/0CZgIDXIDzE/s1600/Rocks+Water+wallpaper.jpg"),
+//        ImageModel("https://images.hdqwalls.com/wallpapers/yellowstone-national-park-hd-qs.jpg"),
+//        ImageModel("https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8NHx8fGVufDB8fHx8fA%3D%3D"),
+//        ImageModel("https://images.unsplash.com/photo-1674407729043-c21b71fded37?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTh8MTMxOTA0MHx8ZW58MHx8fHx8"),
+//    )
+
+
+//      Fetching data from firebase
+//    private fun firebaseReadData() {
+//
+//        val db = Firebase.firestore
+//        db.collection("templates")
+//            .get()
+//            .addOnSuccessListener { result ->
+//                for(doc in result) {
+//                    Log.d(TAG, "${doc.id} => ${doc.data}")
+////                    println("-/-/-/-/-/-/-/-/-/-/-/-/-/Data Fetched")
+//                }
+//            }
+//            .addOnFailureListener() {exception ->
+//                Log.w(TAG, "/-/-/-/-/-/ Error in fetching images", exception)
+//
+//            }
+//    }
+
+
+//    }
 
 
     override fun onDestroy() {

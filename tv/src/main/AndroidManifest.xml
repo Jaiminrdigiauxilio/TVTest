@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <uses-feature
         android:name="android.software.leanback"
@@ -17,11 +18,12 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.NoTitleBar">
-
+        <activity
+            android:name=".ErrorScreen"
+            android:exported="false" />
         <activity
             android:name=".ImagePreviewActivity"
             android:exported="false" />
-
         <activity
             android:name=".MainActivity"
             android:exported="true">
