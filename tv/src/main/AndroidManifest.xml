@@ -19,6 +19,12 @@
         android:supportsRtl="true"
         android:theme="@android:style/Theme.NoTitleBar">
         <activity
+            android:name=".SignupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".ErrorScreen"
             android:exported="false" />
         <activity

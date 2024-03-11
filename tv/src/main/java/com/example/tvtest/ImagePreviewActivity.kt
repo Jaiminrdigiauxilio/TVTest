@@ -141,6 +141,7 @@ class ImagePreviewActivity : FragmentActivity() {
     }
 
 
+//    https://images.hdqwalls.com/wallpapers/yellowstone-national-park-hd-qs.jpg
     //    private val imgList = listOf(
 //        ImageModel("https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D"),
 //        ImageModel("https://1.bp.blogspot.com/-BknVauztAWE/Uv4XuRHItGI/AAAAAAAAChk/0CZgIDXIDzE/s1600/Rocks+Water+wallpaper.jpg"),
