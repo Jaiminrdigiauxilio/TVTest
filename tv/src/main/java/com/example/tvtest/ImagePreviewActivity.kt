@@ -27,7 +27,7 @@ class ImagePreviewActivity : FragmentActivity() {
     private val fetchedImgList = mutableListOf<Map<String, Any>>()
     private val imgList = mutableListOf<MediaItem>()
     private val durationList = mutableListOf<Long>(
-        2500,
+        10000,
     )
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
     private val TAG = "ImageFetch"
@@ -79,7 +79,7 @@ class ImagePreviewActivity : FragmentActivity() {
 
         val registration = docRef.addSnapshotListener { snapshot, err ->
             if (err != null) {
-                Log.w("fire", "Listen Failed",err)
+                Log.w(TAG, "Listen Failed",err)
                 println("-/-/-/-/-/Listen Failed $err")
                 return@addSnapshotListener
             }
@@ -139,16 +139,6 @@ class ImagePreviewActivity : FragmentActivity() {
         imgAdapter.updateData(imgList)
         Log.d(TAG,"-/-/ LOCAL URLS LIST ${imgList}")
     }
-
-
-//    https://images.hdqwalls.com/wallpapers/yellowstone-national-park-hd-qs.jpg
-    //    private val imgList = listOf(
-//        ImageModel("https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D"),
-//        ImageModel("https://1.bp.blogspot.com/-BknVauztAWE/Uv4XuRHItGI/AAAAAAAAChk/0CZgIDXIDzE/s1600/Rocks+Water+wallpaper.jpg"),
-//        ImageModel("https://images.hdqwalls.com/wallpapers/yellowstone-national-park-hd-qs.jpg"),
-//        ImageModel("https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8NHx8fGVufDB8fHx8fA%3D%3D"),
-//        ImageModel("https://images.unsplash.com/photo-1674407729043-c21b71fded37?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTh8MTMxOTA0MHx8ZW58MHx8fHx8"),
-//    )
 
 
 //      Fetching data from firebase

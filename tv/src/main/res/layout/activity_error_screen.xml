@@ -39,4 +39,17 @@
         app:layout_constraintTop_toTopOf="@id/e_guideline_center"
         app:layout_constraintVertical_bias="0.495" />
 
+    <ImageView
+        android:id="@+id/ErrorImg"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:adjustViewBounds="true"
+        android:contentDescription="No Internet Image"
+        app:layout_constraintDimensionRatio="16:9"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent=".6" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -54,7 +54,7 @@
     
     <TextView
         android:id="@+id/title"
-        android:text="Welcome!"
+        android:text="Welcome to SyncScreen!"
         android:textSize="28sp"
         app:layout_constraintTop_toTopOf="@+id/guideline_top"
         app:layout_constraintStart_toStartOf="@id/guideline_vert"
