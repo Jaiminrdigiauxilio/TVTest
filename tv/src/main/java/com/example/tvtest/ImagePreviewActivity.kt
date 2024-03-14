@@ -47,9 +47,23 @@ class ImagePreviewActivity : FragmentActivity() {
 
             imgAdapter = ImageAdapter(imgList)
             viewPager.adapter = imgAdapter
-
             viewPager.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
             var currentItem = 0
+
+//            viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback(){
+//                override fun onPageSelected(position: Int) {
+//                    super.onPageSelected(position)
+//                    imgList.forEachIndexed { index, mediaItem ->
+//                        if (mediaItem.mediaType == MediaType.VIDEO) {
+//                            if(index == position) {
+//                                //  play player here
+//                            } else {
+//                                //  pause player here
+//                            }
+//                        }
+//                    }
+//                }
+//            })
 
             while (isActive) {
 //                var currentDelay = 0
@@ -64,7 +78,6 @@ class ImagePreviewActivity : FragmentActivity() {
                     } else {
                         currentItem = 0
                     }
-
                 }
             }
         }
@@ -168,3 +181,5 @@ class ImagePreviewActivity : FragmentActivity() {
         coroutineScope.cancel()
     }
 }
+
+
